@@ -26,18 +26,19 @@ def change(x, y):
 
 def inside(head):
     """Return True if head inside boundaries.""" 
-#This function checks whether the given head position is inside the boundaries of the game screen. The game screen has a width and height of 400 units each, and the boundaries are defined as -200 to 190 for both the x and y coordinates. If the head is within these boundaries, the function returns True; otherwise, it returns False.
+#This function checks whether the given head position is inside the boundaries of the game screen
 
-    return -200 < head.x < 190 and -200 < head.y < 190
+    return -200 < head.x < 190 and -200 < head.y < 190 #The boundaries are defined as -200 to 190 for both the x and y coordniates
+#When the head is between this boundaries, the function returns true, otherwise False
 
-#Move Functions
+#Move Function
 def move():
     """Move snake forward one segment.""" 
 #This function is responsible for moving the snake 
 
 #Copy Head Position:
     head = snake[-1].copy() 
-#Creates a copy of the current head position.
+#Creates a copy of the current head position
     
 #Move Head:
     head.move(aim)
@@ -62,7 +63,7 @@ def move():
         snake.pop(0)
 #If the head coincides with the food position, the snake has eaten the food. The snake's length is printed, and a new position for the food is randomly generated. Otherwise, the snake's tail is popped, maintaining its length.
 
-#Clear the Screen:
+#Clear the Screen
     clear()
 #Clears the screen to update the display with the new snake and food positions.
 
@@ -80,7 +81,7 @@ def move():
     ontimer(move, 100)
 #Uses the ontimer function to create a game loop, calling the move function every 100 milliseconds to continue the game.
 
-#End of move functions
+
 
 setup(420, 420, 370, 0)
 hideturtle()
