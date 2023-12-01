@@ -14,6 +14,9 @@ score_display.hideturtle()
 score_display.penup()
 score_display.goto(160, 190)
 score_display.write(f"Score: {score}", align="center", font=("Arial", 14, "normal"))
+end_display = Turtle()
+end_display.hideturtle()
+end_display.penup()
 
 def change(x, y):
     """Change snake direction."""
@@ -41,7 +44,7 @@ def move():
     
     if head in snake:
         square(head.x, head.y, 9, 'red')
-        print("You lose!")
+        end_display.write(f"You Lose!", align="center", font=("Arial", 14, "normal"))
         update()
         return
 
@@ -71,9 +74,9 @@ setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 listen()
-onkey(lambda: change(10, 0), 'Right')
-onkey(lambda: change(-10, 0), 'Left')
-onkey(lambda: change(0, 10), 'Up')
-onkey(lambda: change(0, -10), 'Down')
+onkey(lambda: change(10, 0), 'd')
+onkey(lambda: change(-10, 0), 'a')
+onkey(lambda: change(0, 10), 'w')
+onkey(lambda: change(0, -10), 's')
 move()
 done()
