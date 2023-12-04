@@ -21,6 +21,7 @@ from freegames import square, vector
 food = vector(0, 0) 
 delay = 100
 end_display = Turtle()
+quit_display = Turtle()
 
 # Initializes variables for Snake 1/Player 1
 snake = [vector(10, 0)]
@@ -56,10 +57,10 @@ score_display.color('yellow')
 score_display.write(f"Score: {score}", align="center", font=("Arial", 14, "normal")) #(J.H) This write() function provides the actual letters/words we see on the screen. The first argument is what's being outputted onto the screen and because the score is being updated we use python f-string that allows us to embed changing values into our text, which in this case is the score. The other arguments configure the allignment, font, and size of the text.
 
 #Creates the display for informing the player on how to quit the game
-quit_display = Turtle()
-quit_display.hideturtle()
-quit_display.penup()
-quit_display.goto(0,-25)
+def quit_info():
+    quit_display.hideturtle()
+    quit_display.penup()
+    quit_display.goto(0,-25)
 
 #Creates the game ending acknowledgement
 def lose_display():
@@ -70,14 +71,14 @@ def change(x, y):
     aim.x = x #(J.H) The vector.x() function changes the x-value of the two dimensional vector. We use this function to state that the x value in the vector defined by aim is equal to the first argument of the change function, which will be used/changed in the controls of the player at the bottom of the code.
     aim.y = y #(J.H) The vector.y() function changes the y-value of the two dimensional vector. We use this function to state that the y value in the vector defined by aim is equal to the second argument of the change function, which will be used/changed in the controls of the player at the bottom of the code.
 
-def restart_game(): #(J.H) This function restores the initial values onto the game variables that allows for a fresh game to start.
+def restart_game(): #(J.H) The restart_game() function restores the initial values onto important game variables that allows for a fresh game to start.
     
-    global delay, score, aim, snake #(J.H) The global keyword makes variables belong to the global scope. We use the global keyword here to access the global variables that we defined outside of this function.
+    global delay, score, aim, snake #(J.H) The global keyword makes variables belong to the global scope. We use the global keyword here to access the game variables that we defined outside of this function that we have to restore original values to, to restart the game.
     
     delay = 100 #(J.H) We restore the delay variable to 100 miliseconds.
     score = 0 #(J.H) We restore the score to zero.
     aim = vector(0,-10) #(J.H) We restore the (x,y) values of the aim vector to (0,-10)
-    snake = [vector(10,0)] #(J.H) We restore the 1st element (index 0) which is a vector of the snake list to the (x,y) value of (10,0)
+    snake = [vector(10,0)] #(J.H) We restore the snake list to only contain the original vector with an (x,y) value of (10,0)
     
     score_display.clear() #(J.H) We clear the score from the previous run of the game to allow for a fresh start
     score_display.write(f"Score: {score}", align="center", font=("Arial", 14, "normal")) #(J.H) We reinitalize/configure the text, it's allignment, size, and font.
@@ -95,23 +96,24 @@ def one_player():
     
     global delay, score
     
-    if head.x == 200: #(J.H) Using the copy of the snake vector representing the head, we check that if the x-value of the vector is = to 200 (far right)...
+    if head.x == 200: #(J.H) Using the copy of the snake vectors representing the head and body of the snake, we check that if the x-value of the vector is = to 200 (far right)...
         head.x = -200 #(J.H) We 'teleport' it to the other side of the screen which is the -200 value
     elif head.x < -200: #(J.H) As well, we check that if the x-value of the vector is < -200 (far left)...
         head.x = 190 #(J.H) We 'teleport' the head to the other side of the game screen which is the 190 value
         
-    if head.y == 200: #(J.H) These checks are the same but for the y-value. If the y-value of the vector representing the head is = to 200 (top)...
+    if head.y == 200: #(J.H) These checks are the same but for the y-value. If the y-value of the vector representing the head and body of the snake is = to 200 (top)...
         head.y = -200 #(J.H) Then we 'teleport' it to the bottom of the screen which is -200
-    elif head.y < -200: #(J.H) We check if the y-value of the vector representing the head is < -200 (bottom) and if it is...
+    elif head.y < -200: #(J.H) We check if the y-value of the vector is < -200 (bottom) and if it is...
         head.y = 190 #(J.H) We 'teleport' it to the top of the screen
     
     lose_display()
+    quit_info()
     
     if head in snake: #(J.H) This if statement checks whether or not the (x,y) value of the vector representing the head of the snake is in the list snake, which holds vectors of the snake's body. 
         square(head.x, head.y, 9, 'red') #(J.H) If the vector representing the head is found in the snake list, then we use the square() function to draw a red sqaure with a side length of 9 at the (x,y) coordinate of the head.
         
         end_display.color('yellow') #(J.H) After calling the lose_display() function before this if statement we first initialize it's colour to yellow.
-        end_display.write("You Lose! Restarting in 6 seconds...", align="center", font=("Arial", 14, "normal")) #(J.H) We then use the write() function to actually output text saying that the player lost and the game will automatically be restarting in 6 seconds. WE've also configured the font, size, and allignment.
+        end_display.write("You Lose! Restarting in 6 seconds...", align="center", font=("Arial", 14, "normal")) #(J.H) We then use the write() function to actually output text saying that the player lost and the game will automatically be restarting in 6 seconds. We've also configured the font, size, and allignment.
         
         quit_display.color('yellow') #(J.H) With the quitting information, we change the text colour to yellow.
         quit_display.write("Click on the screen at any time to end the game", align="center", font=("Arial", 14, "normal")) #(J.H) We use the write() function to display the quitting information to the user. We also configure the font, size, and allignment.
