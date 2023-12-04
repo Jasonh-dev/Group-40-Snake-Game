@@ -1,13 +1,3 @@
-"""Snake, classic arcade game.
-
-Exercises
-
-1. How do you make the snake faster or slower?
-2. How can you make the snake go around the edges?
-3. How would you move the food?
-4. Change the snake to respond to mouse clicks.
-"""
-
 from random import randrange
 from turtle import *
 
@@ -52,7 +42,7 @@ def move():
 #Checks if the head is outside the game boundaries or if it collides with the snake itself. If either condition is true, the game ends. The head position is marked with a red square, and the game is updated.
 
 #Update Snake Length:
-   snake.append(head) #Adds the new head position to the snake
+    snake.append(head) #Adds the new head position to the snake
 
 #Check for Food Eaten:
     if head == food:
@@ -81,8 +71,6 @@ def move():
     ontimer(move, 100)
 #Uses the ontimer function to create a game loop, calling the move function every 100 milliseconds to continue the game.
 
-
-
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
@@ -93,4 +81,3 @@ onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
 move()
 done()
-
