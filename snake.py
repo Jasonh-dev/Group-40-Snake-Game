@@ -1,6 +1,6 @@
 #Original Snake Code File/Game
 #Jason Hui (J.H)
-
+#Fatima Pina (F.P)
 from random import randrange
 #(J.H) The randrange function generates a random integer between a specified range (exclusive).
 #(J.H) We use this function to generate the (x,y) coordinates of the food block once it has been eaten by a snake. 
@@ -28,30 +28,30 @@ def change(x, y): #(J.H) This function changes the (x,y) value of the vector tha
     aim.y = y #(J.H) The vector.y() function changes the y-value of the two dimensional vector. We use this function to state that the y value in the vector defined by aim is equal to the second argument of the change function, which will be used/changed in the controls of the player at the bottom of the code.
 
 
-def inside(head): #This function checks whether the given head position is inside the boundaries of the game screen
+def inside(head): #(F.P) #This function checks whether the given head position is inside the boundaries of the game screen
     """Return True if head inside boundaries.""" 
     return -200 < head.x < 190 and -200 < head.y < 190 
-    #The boundaries are defined as -200 to 190 for both the x and y coordniates
-    #When the head is between this boundaries, the function returns true, otherwise False
+    #(F.P)The boundaries are defined as -200 to 190 for both the x and y coordniates
+    #(F.P) When the head is between this boundaries, the function returns true, otherwise False
 
-def move(): #This function is responsible for moving the snake 
+def move(): #(F.P) This function is responsible for moving the snake 
     """Move snake forward one segment.""" 
 
     head = snake[-1].copy() #Creates a copy of the current head position
     
-    head.move(aim) #Moves the head in the direction specified by the aim vector. The aim vector determines the direction in which the snake is moving.
+    head.move(aim) #(F.P) Moves the head in the direction specified by the aim vector. The aim vector determines the direction in which the snake is moving.
 
 #Check for Collision:
-    if not inside(head) or head in snake: #Checks if the head is outside the game boundaries or if it collides with the snake itself. If either condition is true, the game ends. The head position is marked with a red square, and the game is updated.
+    if not inside(head) or head in snake: #(F.P) Checks if the head is outside the game boundaries or if it collides with the snake itself. If either condition is true, the game ends. The head position is marked with a red square, and the game is updated.
         square(head.x, head.y, 9, 'red') #(J.H) We use the square() function to draw a red sqaure with a side length of 9 at the (x,y) coordinate of the head.
         update()
         return 
 
 #Update Snake Length:
-    snake.append(head) #Adds the new head position to the snake
+    snake.append(head) #(F.P) Adds the new head position to the snake
 
 #Check for Food Eaten:
-    if head == food: #If the head (x,y) coordinates coincides with the food position, the snake has eaten the food. The snake's length is printed, and a new position for the food is randomly generated. 
+    if head == food: #(F.P) If the head (x,y) coordinates coincides with the food position, the snake has eaten the food. The snake's length is printed, and a new position for the food is randomly generated. 
         print('Snake:', len(snake)) #(J.H) The length of the snake is printed in the terminal that is running the game
         food.x = randrange(-15, 15) * 10 #(J.H) Once the food has been eaten, we use the randrange() function to generate a new x-coordinate to spawn the food block.
         food.y = randrange(-15, 15) * 10 #(J.H) Once the food has been eaten, we use the randrange() function to generate a new y-coordinate to spawn the food block.
@@ -60,7 +60,7 @@ def move(): #This function is responsible for moving the snake
 
 
 
-    clear() #Clears the screen to update the display with the new snake and food positions.
+    clear() #(F.P) Clears the screen to update the display with the new snake and food positions.
 
 #Draw Snake and Food:
     for body in snake: #(J.H) The use of the for loop walks through the snake list and uses the (x,y) coordinate of the vectors to use the square() function to draw the body as a black square with a length of 9 pixels. 
@@ -73,7 +73,7 @@ def move(): #This function is responsible for moving the snake
 
 #Game Loop:
     ontimer(move, 100)
-#Uses the ontimer function to create a game loop, calling the move function every 100 milliseconds to continue the game.
+#(F.P) Uses the ontimer function to create a game loop, calling the move function every 100 milliseconds to continue the game.
 
 setup(420, 420, None, None) #(J.H) The turtle.setup(width, height, x, y) function creates the dimensions of the game window and it's starting position on the screen of a computer. It is initialized to a 420x420 pixel width and height and it'll appear in the centre of a computer screen.
 hideturtle() #(J.H) The hideturtle() function hides the cursor/arrow that appears whenever a line is drawn. We use this function to hide the cursor otherwise you'll see an arrow initializing the game window.
