@@ -1,5 +1,6 @@
 #One Player Snake Game All Functions & Game Code
 #Jason Hui (J.H)
+#Fatima Pina (F.P)
 
 
 from random import randrange 
@@ -18,15 +19,15 @@ from freegames import square, vector
 #(J.H) We use the vector(x,y) function to create two dimensional vectors to represent our snake's initial direction and the snake's aim function which enables the user to change the snake's direction. As well, we create the initial coordinates for the food blocks.
 
 # Initializes game variables
-food = vector(0, 0) 
-delay = 100
-end_display = Turtle()
-quit_display = Turtle()
+food = vector(0, 0) #(F.P) This variable will represent the coordinates of the food 
+delay = 100 #(F.P) Used to control the speed of the snake
+end_display = Turtle() #(F.P) Using a turtle object to display the message for when the game ends
+quit_display = Turtle() #(F.P) Using a turtle object to display intructions fro quitting the game
 
 # Initializes variables for Snake 1/Player 1
-snake = [vector(10, 0)]
-aim = vector(0, -10)
-score = 0
+snake = [vector(10, 0)] #(F.P) Single vector used for the snake's head
+aim = vector(0, -10) #(F.P) Represents the direction in which the snake is moving
+score = 0 #(F.P) This variable will keep track of the score
     
 # Initializes the size of the game window and background colour to black
 setup(450, 450, None, None) #(J.H) The turtle.setup(width, height, x, y) function creates the dimensions of the game window and it's starting position on the screen of a computer. We made it 450 pixed in width and height, and made it appear in the centre of any screen.
@@ -49,11 +50,12 @@ def draw_border():
 draw_border() #(J.H) We call the function at the beginning of the game to show the cool animation/process of drawing the border right away.
 
 #Creates the score display for the player
-score_display = Turtle() 
-score_display.hideturtle()
+score_display = Turtle() #(F.P) It will display the player's score using the turtle module
+score_display.hideturtle() 
 score_display.penup()
 score_display.goto(0, 200)
-score_display.color('yellow')
+#(F.P) Score displays at the top center of the game
+score_display.color('yellow') 
 score_display.write(f"Score: {score}", align="center", font=("Arial", 14, "normal")) #(J.H) This write() function provides the actual letters/words we see on the screen. The first argument is what's being outputted onto the screen and because the score is being updated we use python f-string that allows us to embed changing values into our text, which in this case is the score. The other arguments configure the allignment, font, and size of the text.
 
 #Creates the display for informing the player on how to quit the game
@@ -91,8 +93,8 @@ def restart_game(): #(J.H) The restart_game() function restores the initial valu
 
 def one_player():
     
-    head = snake[-1].copy()
-    head.move(aim)
+    head = snake[-1].copy() #(F.P) The function creates a copy of the last segment that is, the head. 
+    head.move(aim) #(F.P) Moves the head 
     
     global delay, score
     
@@ -123,33 +125,34 @@ def one_player():
         
         return
     
-    snake.append(head)
+    snake.append(head) #(F.P) Adds the new head to the snake's body
     
     if head == food:
-        score += 1
+        score += 1 #(F.P) Increments the score when the position of the snake's head is the same as the food
         score_display.clear()
-        score_display.write(f"Score: {score}", align="center", font=("Arial", 14, "normal"))
+        score_display.write(f"Score: {score}", align="center", font=("Arial", 14, "normal")) #(F.P) Updates the display with the new score
         
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
-        delay -= 5
+        #(F.P) Generates new random coordinates for the next food square
+        delay -= 5 #(F.P)Decreases the delay so that the speed of the snake will increase
     else:
-        snake.pop(0)
+        snake.pop(0) #(F.P) When the snake does not eat the food, it just keeps going straight. The pop() function, removes and return an element at the specific index. It is removing the tail of the snake
         
         clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'yellow')
+        square(body.x, body.y, 9, 'yellow') #(F.P) Draws the snake's body in color yellow
     
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, 'green') #(F.P) Draws the food square in color green
     update()
     ontimer(one_player, delay)
 
 tracer(False)
 listen()
-onkey(lambda: change(10, 0), 'd')
-onkey(lambda: change(-10, 0), 'a')
-onkey(lambda: change(0, 10), 'w')
-onkey(lambda: change(0, -10), 's')
-one_player()
+onkey(lambda: change(10, 0), 'd') #(F.P) Changes snake direction to the right. The onkey () function defines action in response to key presses. Whenever the user presses 'd', it executes the callback function (lambda). The change function updates the aim vector which is the direction of the snake
+onkey(lambda: change(-10, 0), 'a') #(F.P) Chnages snake direction to the left 
+onkey(lambda: change(0, 10), 'w') #(F.P) Changes snake direction up
+onkey(lambda: change(0, -10), 's') #(F.P) Changes snake idrection down
+one_player() 
 done()
