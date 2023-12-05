@@ -22,7 +22,7 @@ from freegames import square, vector
 food = vector(0, 0) #(F.P) This variable will represent the coordinates of the food 
 delay = 100 #(F.P) Used to control the speed of the snake
 end_display = Turtle() #(F.P) Using a turtle object to display the message for when the game ends
-quit_display = Turtle() #(F.P) Using a turtle object to display intructions fro quitting the game
+quit_display = Turtle() #(F.P) Using a turtle object to display intructions for quitting the game
 
 # Initializes variables for Snake 1/Player 1
 snake = [vector(10, 0)] #(F.P) Single vector used for the snake's head
@@ -128,9 +128,9 @@ def one_player():
     snake.append(head) #(F.P) Adds the new head to the snake's body
     
     if head == food:
-        score += 1 #(F.P) Increments the score when the position of the snake's head is the same as the food
+        score += 1 #(F.P) Increments the score by 1 when the position of the snake's head is the same as the food
         score_display.clear()
-        score_display.write(f"Score: {score}", align="center", font=("Arial", 14, "normal")) #(F.P) Updates the display with the new score
+        score_display.write(f"Score: {score}", align="center", font=("Arial", 14, "normal")) #(F.P) Updates the display with the new score using the write() function
         
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
