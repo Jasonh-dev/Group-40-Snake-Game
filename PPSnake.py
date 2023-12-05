@@ -17,20 +17,20 @@ from freegames import square, vector
 #(J.H) We use the vector(x,y) function to create two dimensional vectors to represent our snake's initial direction and the snake's aim function which enables the user to change the snake's direction. As well, we create the initial coordinates for the food blocks.
 
 # Initialize game variables
-food = vector(0, 0)
-delay = 100
-end_display = Turtle()
-quit_display = Turtle()
+food = vector(0, 0) #(F.P) This variable will represent the coordinates of the food 
+delay = 100 #(F.P) Used to control the speed of the snake
+end_display = Turtle() #(F.P) Using a turtle object to display the message for when the game ends
+quit_display = Turtle() #(F.P) Using a turtle object to display intructions for quitting the game
 
 # Initializes variables for Snake 1/Player 1
-snake1 = [vector(10, 0)]
-snake1_aim1 = vector(0, -10)
-score1 = 0
+snake1 = [vector(10, 0)] #(F.P) Single vector used for the player 1 snake's head
+snake1_aim1 = vector(0, -10) #(F.P) Represents the direction in which the player 1's snake is moving
+score1 = 0 #(F.P) This variable will keep track of the score of player 1
 
 # Initializes variables for the Snake 2/Player 2
-snake2 = [vector(-10, 0)]
-snake2_aim2 = vector(0, 10)
-score2 = 0
+snake2 = [vector(-10, 0)] #(F.P) Single vector used for the player 2 snake's head
+snake2_aim2 = vector(0, 10) #(F.P) Represents the direction in which the player 2's snake is moving
+score2 = 0 #(F.P) This variable will keep track of the score of player 1
 
 # Initializes the size of the game window and background colour to black
 setup(450, 450, None, None) #(J.H) The turtle.setup(width, height, x, y) function creates the dimensions of the game window and it's starting position on the screen of a computer. We made it 450 pixed in width and height, and made it appear in the centre of any screen.
@@ -53,15 +53,15 @@ def draw_border():
 draw_border() #(J.H) We call the function at the beginning of the game to show the cool animation/process of drawing the border right away.
 
 #Creates the score display for Snake 1/Player 1
-score_display = Turtle() 
-score_display.hideturtle()
-score_display.penup()
-score_display.goto(-70, 200)
-score_display.color('yellow')
+score_display = Turtle() #(F.P) Calls Turtle () to display the score of Player 1
+score_display.hideturtle #(F.P) Hides the turlte cursor
+score_display.penup() #(F.P) No drawing will be made when moving
+score_display.goto(-70, 200) #(F.P) Moves the cursor to specific corrdinates, in this case -70 and 200
+score_display.color('yellow') #(F.P) Sets the colorr to yellow
 score_display.write(f"P1 Score: {score1}", align="center", font=("Arial", 14, "normal")) #(J.H) This write() function provides the actual letters/words we see on the screen. The first argument is what's being outputted onto the screen and because the score for player 1 is being updated we use python f-string that allows us to embed changing values into our text, which in this case is the score. The other arguments configure the allignment, font, and size of the text.
 
 #Creates the score display for Snake 2/Player 2
-score_display2 = Turtle()
+score_display2 = Turtle() 
 score_display2.hideturtle()
 score_display2.penup()
 score_display2.goto(70,200)
@@ -70,7 +70,7 @@ score_display2.write(f"P2 Score: {score2}", align="center", font=("Arial", 14, "
 
 #Creates the display for informing the player on how to quit the game
 def quit_info():
-    quit_display.hideturtle()
+    quit_display.hideturtle() 
     quit_display.penup()
     quit_display.goto(0,-25)
 
@@ -190,20 +190,21 @@ def two_player():
         exitonclick() #(J.H) Let's the user end the game
         return
 
-    snake1.append(head1)
-    snake2.append(head2)
+    snake1.append(head1) #(F.P) Adds the new head to the snake 1's body
+    snake2.append(head2) #(F.P) Adds the new head to the snake 2's body
 
     if head1 == food:
-        score1 += 1
+        score1 += 1 #(F.P) Incremenents the score of the first player by 1 when the position of the snake's head is the same as the food. 
         
         score_display.clear()
-        score_display.write(f"P1 Score: {score1}", align="center", font=("Arial", 14, "normal"))
+        score_display.write(f"P1 Score: {score1}", align="center", font=("Arial", 14, "normal")) #(F.P) Updates the display with the new score using the write() function
         
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
-        delay -= 5
+        #(F.P) Generates random coordinates for the next food square 
+        delay -= 5 #(F.P) Decreases the delay so that the speed of the snake will increase
     else:
-        snake1.pop(0)
+        snake1.pop(0) #(F.P) When player 1's snake does not eat the food, it just keeps going straight. The pop() function, removes and return an element at the specific index. It is removing the tail of the snake
 
     if head2 == food:
         score2 += 1
@@ -220,11 +221,11 @@ def two_player():
     clear()
 
     for body in snake1:
-        square(body.x, body.y, 9, 'yellow')
+        square(body.x, body.y, 9, 'yellow') #(F.P) Draws the player 1's snake body in color yellow
     for body in snake2:
-        square(body.x, body.y, 9, 'cyan')
+        square(body.x, body.y, 9, 'cyan') #(F.P) Drwas the player 2's snake body in color cyan
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, 'green') #(F.P) Draws the food square in color green
     update()
     ontimer(two_player, delay)
 
