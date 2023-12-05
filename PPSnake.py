@@ -1,5 +1,6 @@
 #Two Player Snake Game All Functions & Game Code
 #Jason Hui (J.H)
+#Fatima Pina (F.P)
 
 from random import randrange 
 #(J.H) The randrange function generates a random integer between a specified range (exclusive).
